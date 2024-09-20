@@ -5,17 +5,17 @@
  * found in the LICENSE file.
  */
 
-#include "SkAlphaType.h"
-#include "SkCanvas.h"
-#include "SkColor.h"
-#include "SkFontMgr.h"
-#include "SkFontStyle.h"
-#include "SkImageInfo.h"
-#include "SkPixmap.h"
-#include "SkRefCnt.h"
-#include "SkStream.h"
-#include "SkSurface.h"
-#include "SkPngEncoder.h"
+#include "include/core/SkAlphaType.h"
+#include "include/core/SkCanvas.h"
+#include "include/core/SkColor.h"
+#include "include/core/SkFontMgr.h"
+#include "include/core/SkFontStyle.h"
+#include "include/core/SkImageInfo.h"
+#include "include/core/SkPixmap.h"
+#include "include/core/SkRefCnt.h"
+#include "include/core/SkStream.h"
+#include "include/core/SkSurface.h"
+#include "include/encode/SkPngEncoder.h"
 #include "modules/svg/include/SkSVGDOM.h"
 #include "modules/skshaper/utils/FactoryHelpers.h"
 

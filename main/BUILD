@@ -4,12 +4,12 @@ cc_binary(
     copts = [
         "-Iexternal/skia/include/core",
     ],
-    #    includes = [
-    #        "skia/include/core",
-    #    ],
-    #    linkopts = [
-    #        "-lpthread",
-    #    ],
+    # includes = [
+    #     "skia/include/core",
+    # ],
+    # linkopts = [
+    #     "-lpthread",
+    # ],
     deps = [
         "@skia//:core",
         "@skia//:png_encode_codec",
