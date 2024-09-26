@@ -1,15 +1,15 @@
 cc_binary(
     name = "hello-world",
     srcs = ["hello-world.cpp"],
-    copts = [
-        "-Iexternal/skia/include/core",
-    ],
-    # includes = [
-    #     "skia/include/core",
-    # ],
-    # linkopts = [
-    #     "-lpthread",
-    # ],
+    #    copts = [
+    #        "-Iexternal/skia/include/core",
+    #    ],
+    #    includes = [
+    #        "skia/include/core",
+    #    ],
+    #    linkopts = [
+    #        "-lpthread",
+    #    ],
     deps = [
         "@skia//:core",
         "@skia//:png_encode_codec",
