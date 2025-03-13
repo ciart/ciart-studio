@@ -11,7 +11,10 @@ cc_library(
     hdrs = [
         "workspace.h",
     ],
-    aspect_hints = [":core_swift_interop"],
+    aspect_hints = select({
+        "@platforms//os:macos": [":core_swift_interop"],
+        "//conditions:default": [],
+    }),
     visibility = ["//visibility:public"],
     deps = [
         "@skia//:core",
