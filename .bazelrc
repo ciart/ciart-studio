@@ -1,7 +1,6 @@
 build --cxxopt='-std=c++17'
-build --noenable_bzlmod
-build --enable_workspace
 
+build:windows --extra_toolchains=@local_config_cc//:cc-toolchain-x64_windows-clang-cl
 build:windows --extra_execution_platforms=//:x64_windows-clang-cl
 build:windows --compiler=clang-cl
 build:windows --cxxopt='/std:c++17'

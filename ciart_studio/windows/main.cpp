@@ -3,8 +3,6 @@
 #endif 
 
 #include <windows.h>
-#include <string>
-#include "../core/workspace.h"
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -23,13 +21,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
     // Create the window.
 
-    Ciart::Studio::Workspace workspace(10);
-    int x = workspace.print();
-
     HWND hwnd = CreateWindowEx(
         0,                              // Optional window styles.
         CLASS_NAME,                     // Window class
-        (L"Learn to Program Windows" + std::to_wstring(x)).c_str(),    // Window text
+        L"Learn to Program Windows",    // Window text
         WS_OVERLAPPEDWINDOW,            // Window style
 
         // Size and position
