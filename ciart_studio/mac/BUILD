@@ -21,7 +21,7 @@ licenses(["notice"])
 
 swift_library(
     name = "Sources",
-    srcs = ["Sources/App.swift"],
+    srcs = glob(["**/*.swift"]),
     #    data = [
     #        "Resources/Main.storyboard",
     #    ],
