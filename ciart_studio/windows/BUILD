@@ -5,5 +5,7 @@ cc_binary(
     ],
     linkopts = [
         "-SUBSYSTEM:WINDOWS",
-    ]
+        "User32.lib",
+    ],
+    deps = ["//ciart_studio/core"],
 )
