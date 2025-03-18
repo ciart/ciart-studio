@@ -11,11 +11,11 @@ load(
     "@build_bazel_rules_swift//swift:swift.bzl",
     "swift_library",
 )
-#load(
-#    "@rules_xcodeproj//xcodeproj:defs.bzl",
-#    "top_level_target",
-#    "xcodeproj",
-#)
+load(
+    "@rules_xcodeproj//xcodeproj:defs.bzl",
+    "top_level_target",
+    "xcodeproj",
+)
 
 licenses(["notice"])
 
@@ -45,17 +45,17 @@ macos_application(
     deps = [":Sources"],
 )
 
-#xcodeproj(
-#    name = "xcodeproj",
-#    project_name = "CiartStudio",
-#    tags = ["manual"],
-#    top_level_targets = [
-#        top_level_target(
-#            ":CiartStudio",
-#            target_environments = ["device"],
-#        ),
-#    ],
-#)
+xcodeproj(
+   name = "xcodeproj",
+   project_name = "CiartStudio",
+   tags = ["manual"],
+   top_level_targets = [
+       top_level_target(
+           ":CiartStudio",
+           target_environments = ["device"],
+       ),
+   ],
+)
 
 # Not normally needed, just done for rules_apple's examples so a
 # 'bazel test examples/...' ensures all Examples still build.
