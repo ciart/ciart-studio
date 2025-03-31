@@ -15,6 +15,7 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         "@skia//:core",
+        "@skia//:graphite_native_metal",
         "@skia//:png_encode_codec",
         "@skia//:skshaper_core",
         "@skia//:svg_renderer",

@@ -22,8 +22,8 @@ struct SkiaView: NSViewRepresentable {
             self.device = MTLCreateSystemDefaultDevice()
             self.commandQueue = self.device.makeCommandQueue()
             
-            let rustDevice = Unmanaged.passUnretained(device).toOpaque()
-            let rustCommandQueue = Unmanaged.passUnretained(commandQueue).toOpaque()
+            // let rustDevice = Unmanaged.passUnretained(device).toOpaque()
+            // let rustCommandQueue = Unmanaged.passUnretained(commandQueue).toOpaque()
             
 //            context = create_metal_context(rustDevice, rustCommandQueue, nil)
             
