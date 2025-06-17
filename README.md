@@ -8,7 +8,15 @@
 
 2. `set BAZEL_LLVM=C:\Program Files\LLVM`
 
-3. `bazel build --config=windows //main:hello-world`
+3. `bazel build --config=windows //windows:app`
 
 ## Mac
-1. `bazel run //ciart_studio/mac:CiartStudio`
+1. `bazel run //mac:app`
+
+# 추가 명령
+
+- ****
+`bazel run @hedron_compile_commands//:refresh_all`
+
+-  **Xcode 프로젝트 생성**
+`bazel run //ciart_studio/mac:xcodeproj`

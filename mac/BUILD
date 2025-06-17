@@ -20,29 +20,30 @@ load(
 licenses(["notice"])
 
 swift_library(
-    name = "Sources",
+    name = "sources",
     srcs = glob(["**/*.swift"]),
     #    data = [
     #        "Resources/Main.storyboard",
     #    ],
     copts = ["-cxx-interoperability-mode=default"],
-    deps = ["//ciart_studio/core"],
+    deps = ["//core"],
 )
 
 apple_bundle_version(
-    name = "CiartStudioVersion",
+    name = "ciart_studio_version",
     build_version = "1.0",
 )
 
 macos_application(
-    name = "CiartStudio",
+    name = "app",
+    bundle_name = "CiartStudio",
     #    app_icons = ["Resources:MacAppIcon.xcassets"],
     bundle_id = "com.ciart.studio",
     infoplists = [":Info.plist"],
     minimum_os_version = "12.0",
-    version = ":CiartStudioVersion",
+    version = ":ciart_studio_version",
     visibility = ["//visibility:public"],
-    deps = [":Sources"],
+    deps = [":sources"],
 )
 
 xcodeproj(
@@ -51,7 +52,7 @@ xcodeproj(
    tags = ["manual"],
    top_level_targets = [
        top_level_target(
-           ":CiartStudio",
+           ":app",
            target_environments = ["device"],
        ),
    ],
@@ -61,5 +62,5 @@ xcodeproj(
 # 'bazel test examples/...' ensures all Examples still build.
 build_test(
     name = "ExamplesBuildTest",
-    targets = [":CiartStudio"],
+    targets = [":app"],
 )

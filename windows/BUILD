@@ -1,5 +1,5 @@
 cc_binary(
-    name = "CiartStudio",
+    name = "app",
     srcs = [
         "main.cpp",
     ],
@@ -7,5 +7,5 @@ cc_binary(
         "-SUBSYSTEM:WINDOWS",
         "User32.lib",
     ],
-    deps = ["//ciart_studio/core"],
+    deps = ["//core"],
 )
