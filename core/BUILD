@@ -5,12 +5,8 @@ load(
 
 cc_library(
     name = "core",
-    srcs = [
-        "workspace.cpp",
-    ],
-    hdrs = [
-        "workspace.h",
-    ],
+    srcs = glob(["*.cpp"]),
+    hdrs = glob(["*.h"]),
     aspect_hints = [":core_swift_interop"],
     visibility = ["//visibility:public"],
     deps = [

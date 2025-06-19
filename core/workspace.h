@@ -1,34 +1,30 @@
-//
-// Created by Pdom on 10/9/24.
-//
 #pragma once
 
-#include "include/gpu/graphite/Context.h"
-#include "include/gpu/graphite/ContextOptions.h"
-#include "include/gpu/graphite/GraphiteTypes.h"
-#include "include/gpu/graphite/Recorder.h"
-#include "include/gpu/graphite/Surface.h"
-#include "include/gpu/graphite/mtl/MtlBackendContext.h"
-#include "include/core/SkBitmap.h"
-#include "include/core/SkCanvas.h"
-#include "include/core/SkImage.h"
-#include "include/core/SkRRect.h"
-#include "include/core/SkRect.h"
-#include "include/core/SkSize.h"
-#include "include/core/SkStream.h"
-#include "include/core/SkSurface.h"
-#include "include/core/SkColorSpace.h"
-#include "include/gpu/graphite/mtl/MtlGraphiteUtils.h"
-#include "include/gpu/graphite/mtl/MtlGraphiteTypes_cpp.h"
+#include "type.h"
 
 namespace Ciart {
     namespace Studio {
         class Workspace {
         public:
-            Workspace(void* device, void* commandQueue);
-            void draw(void* texture, double width, double height);
-            void resize(double width, double height);
-            std::unique_ptr<skgpu::graphite::Context> context;
+            Workspace() {}
+            
+            const Size& getSize() const { return size; }
+            const Offset& getOffset() const { return offset; }
+            double getAngle() const { return angle; }
+            double getScale() const { return scale; }
+            
+            void setSize(const Size& size) { this->size = size; }
+            void setOffset(const Offset& offset) { this->offset = offset; }
+            void setAngle(double angle) { this->angle = angle; }
+            void setScale(double scale) { this->scale = scale; }
+
+            void move(double dx, double dy);
+            void room(double magnification);
+        private:
+            Size size {100, 100};
+            Offset offset {0, 0};
+            double angle = 0.0;
+            double scale = 1.0;
         };
     }
 }
