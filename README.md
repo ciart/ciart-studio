@@ -15,8 +15,5 @@
 
 # 추가 명령
 
-- ****
-`bazel run @hedron_compile_commands//:refresh_all`
-
 -  **Xcode 프로젝트 생성**
 `bazel run //ciart_studio/mac:xcodeproj`

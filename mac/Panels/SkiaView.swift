@@ -152,13 +152,17 @@ struct SkiaView: NSViewRepresentable {
         }
 
         mtkView.onScrollWheel = { event in
-            context.coordinator.workspace.move(event.scrollingDeltaX, event.scrollingDeltaY)
+            if event.hasPreciseScrollingDeltas {
+                context.coordinator.workspace.move(event.scrollingDeltaX, event.scrollingDeltaY)
+            } else {
+                context.coordinator.workspace.zoom(event.scrollingDeltaY)
+            }
             mtkView.setNeedsDisplay(mtkView.bounds)
-            print("Scroll wheel deltaX: \(event.scrollingDeltaX), deltaY: \(event.scrollingDeltaY)")
+            print("Scroll: precise=\(event.hasPreciseScrollingDeltas), deltaX=\(event.scrollingDeltaX), deltaY=\(event.scrollingDeltaY)")
         }
 
         mtkView.onMagnify = { event in
-            context.coordinator.workspace.room(event.magnification)
+            context.coordinator.workspace.zoom(event.magnification)
             mtkView.setNeedsDisplay(mtkView.bounds)
             print("Magnification: \(event.magnification)")
         }

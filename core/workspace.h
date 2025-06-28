@@ -2,6 +2,8 @@
 
 #include "type.h"
 
+#define MIN_SCALE 0.5
+
 namespace Ciart {
     namespace Studio {
         class Workspace {
@@ -19,7 +21,7 @@ namespace Ciart {
             void setScale(double scale) { this->scale = scale; }
 
             void move(double dx, double dy);
-            void room(double magnification);
+            void zoom(double magnification);
         private:
             Size size {100, 100};
             Offset offset {0, 0};

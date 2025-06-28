@@ -7,6 +7,10 @@ void Workspace::move(double dx, double dy) {
     offset.dy += dy;
 }
 
-void Workspace::room(double magnification) {
+void Workspace::zoom(double magnification) {
     scale += magnification;
+
+    if (scale < MIN_SCALE) {
+        scale = MIN_SCALE;
+    }
 }
