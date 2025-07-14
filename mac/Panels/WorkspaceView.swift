@@ -1,109 +1,180 @@
 //
-//  WorkspaceView.swift
+//  SkiaView.swift
 //  Studio
 //
-//  Created by Pdom on 5/5/24.
+//  Created by Pdom on 5/28/24.
 //
 
 import AppKit
+import CiartStudioCore
+import MetalKit
 import SwiftUI
 
-class NSWorkspaceView: NSView {
-    var offset: CGPoint = .zero
-    var angle: Angle = .zero
-    var scale: CGFloat = 1
-    var pageSize = CGSize(width: 200, height: 200)
-    
-    func computeOrigin() -> CGPoint {
-        let center = bounds.size.center
-        let pageCenter = pageSize.center
-        
-        return CGPoint(x: center.x - pageCenter.x * scale + offset.x, y: center.y - pageCenter.y * scale + offset.y)
+typealias Workspace = Ciart.Studio.Workspace
+typealias WorkspaceRenderer = Ciart.Studio.WorkspaceRenderer
+
+class CustomMTKView: MTKView {
+    var onMouseMoved: ((NSEvent) -> Void)?
+    var onMouseDown: ((NSEvent) -> Void)?
+    var onMouseUp: ((NSEvent) -> Void)?
+    var onMouseDragged: ((NSEvent) -> Void)?
+    var onScrollWheel: ((NSEvent) -> Void)?
+    var onMagnify: ((NSEvent) -> Void)?
+    var onRotate: ((NSEvent) -> Void)?
+
+    override func updateTrackingAreas() {
+        super.updateTrackingAreas()
+
+        for trackingArea in self.trackingAreas {
+            self.removeTrackingArea(trackingArea)
+        }
+
+        let options: NSTrackingArea.Options = [
+            .activeInKeyWindow, .mouseMoved, .mouseEnteredAndExited,
+        ]
+        let trackingArea = NSTrackingArea(
+            rect: self.bounds, options: options, owner: self, userInfo: nil)
+        self.addTrackingArea(trackingArea)
     }
-    
-    func computeRotateOffset(localLocation: CGPoint, deltaAngle: Angle) -> CGPoint {
-        let origin = computeOrigin()
-        let distance = localLocation.distance(to: origin)
-        
-        let a = atan2(localLocation.y - origin.y, localLocation.x - origin.x) + deltaAngle.radians
-        
-        let x = cos(a)
-        let y = sin(a)
-        let center = bounds.size.center
-        let pageCenter = pageSize.center
-        
-        return CGPoint(x: x * distance * scale - center.x - pageCenter.x * scale, y: y * distance * scale - center.y - pageCenter.y * scale)
+
+    override func mouseMoved(with event: NSEvent) {
+        onMouseMoved?(event)
     }
-    
-    override func draw(_ dirtyRect: NSRect) {
-        super.draw(dirtyRect)
-        
-        self.drawCanvas()
-    }
-    
-    override func scrollWheel(with event: NSEvent) {
-        offset.x += event.scrollingDeltaX
-        offset.y -= event.scrollingDeltaY
-        
-        setNeedsDisplay(self.bounds)
-    }
-    
-    override func rotate(with event: NSEvent) {
-        let deltaAngle = Angle(degrees: Double(event.rotation))
-        let locationInWindow = self.convert(event.locationInWindow, from: nil)
-        
-        angle += deltaAngle
-        offset += computeRotateOffset(localLocation: CGPoint(x: locationInWindow.x, y: locationInWindow.y), deltaAngle: deltaAngle)
-        
-        setNeedsDisplay(self.bounds)
-    }
-    
-    override func magnify(with event: NSEvent) {
-        scale += event.magnification
-        
-        setNeedsDisplay(self.bounds)
-    }
-    
+
     override func mouseDown(with event: NSEvent) {
-        print(self.convert(event.locationInWindow, from: nil))
+        onMouseDown?(event)
     }
-    
-    override func rightMouseDown(with event: NSEvent) {
-//        print(add_rust(30, 40))
-        print(event)
+
+    override func mouseUp(with event: NSEvent) {
+        onMouseUp?(event)
     }
-    
-    func drawCanvas(){
-        NSGraphicsContext.saveGraphicsState()
-        
-        guard let context = NSGraphicsContext.current?.cgContext else { return }
-        
-        let origin = computeOrigin()
-        
-        context.translateBy(x: origin.x, y: origin.y)
-        context.scaleBy(x: scale, y: scale)
-        context.rotate(by: angle.radians)
-        
-        context.setFillColor(.white)
-        
-        context.fill(CGRect(x: 0, y: 0, width: pageSize.width, height: pageSize.height))
-        
-        NSGraphicsContext.restoreGraphicsState()
+
+    override func mouseDragged(with event: NSEvent) {
+        onMouseDragged?(event)
+    }
+
+    override func scrollWheel(with event: NSEvent) {
+        onScrollWheel?(event)
+    }
+
+    override func magnify(with event: NSEvent) {
+        onMagnify?(event)
+    }
+
+    override func rotate(with event: NSEvent) {
+        onRotate?(event)
     }
 }
-
 
 struct WorkspaceView: NSViewRepresentable {
-    typealias NSViewType = NSWorkspaceView
-    
-    func makeNSView(context: Context) -> NSWorkspaceView {
-        NSWorkspaceView()
-    }
-    
-    func updateNSView(_ nsView: NSWorkspaceView, context: Context) {
-    }
-}
+    typealias NSViewType = CustomMTKView
 
-#Preview {
-    WorkspaceView().frame(width: 400, height: 300)
+    class Coordinator: NSObject, MTKViewDelegate {
+        var parent: WorkspaceView
+        var device: MTLDevice!
+        var commandQueue: MTLCommandQueue!
+        var workspace: Workspace!
+        var workspaceRenderer: WorkspaceRenderer!
+
+        init(_ parent: WorkspaceView) {
+            self.parent = parent
+            self.device = MTLCreateSystemDefaultDevice()
+            self.commandQueue = self.device.makeCommandQueue()
+
+            self.workspace = Workspace()
+            self.workspaceRenderer = WorkspaceRenderer(
+                Unmanaged.passUnretained(device).toOpaque(),
+                Unmanaged.passUnretained(commandQueue).toOpaque())
+
+            super.init()
+        }
+
+        func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
+//            workspaceRenderer?.resize(size.width, size.height)
+        }
+
+        func draw(in view: MTKView) {
+            guard let drawable = view.currentDrawable else { return }
+
+            let commandBuffer = commandQueue.makeCommandBuffer()
+            
+            workspaceRenderer?.draw(
+                &workspace!,
+                Unmanaged.passUnretained(drawable.texture).toOpaque(),
+                drawable.layer.drawableSize.width, drawable.layer.drawableSize.height)
+
+            // let rpd = view.currentRenderPassDescriptor
+            // rpd?.colorAttachments[0].clearColor = MTLClearColor(red: 0, green: 0, blue: 0, alpha: 1)
+            // rpd?.colorAttachments[0].loadAction = .clear
+            // rpd?.colorAttachments[0].storeAction = .store
+            // let re = commandBuffer?.makeRenderCommandEncoder(descriptor: rpd!)
+            // re?.endEncoding()
+
+            commandBuffer?.present(drawable)
+            commandBuffer?.commit()
+        }
+    }
+
+    func makeNSView(context: Context) -> NSViewType {
+        let mtkView = CustomMTKView()
+        mtkView.delegate = context.coordinator
+        mtkView.enableSetNeedsDisplay = true
+        mtkView.presentsWithTransaction = false
+        mtkView.framebufferOnly = false
+        mtkView.colorPixelFormat = .bgra8Unorm
+        mtkView.clearColor = MTLClearColorMake(0, 0, 0, 1)
+        mtkView.device = MTLCreateSystemDefaultDevice()
+
+        // Set up event handlers
+        mtkView.onMouseMoved = { event in
+            let location = mtkView.convert(event.locationInWindow, from: nil)
+            print("Mouse moved to: \(location)")
+        }
+
+        mtkView.onMouseDown = { event in
+            let location = mtkView.convert(event.locationInWindow, from: nil)
+            print("Mouse down at: \(location)")
+        }
+
+        mtkView.onMouseUp = { event in
+            let location = mtkView.convert(event.locationInWindow, from: nil)
+            print("Mouse up at: \(location)")
+        }
+
+        mtkView.onMouseDragged = { event in
+            let location = mtkView.convert(event.locationInWindow, from: nil)
+            print("Mouse dragged to: \(location)")
+        }
+
+        mtkView.onScrollWheel = { event in
+            if event.hasPreciseScrollingDeltas {
+                context.coordinator.workspace.move(event.scrollingDeltaX, event.scrollingDeltaY)
+            } else {
+                context.coordinator.workspace.zoom(event.scrollingDeltaY)
+            }
+            
+            mtkView.setNeedsDisplay(mtkView.bounds)
+            print("Scroll: precise=\(event.hasPreciseScrollingDeltas), deltaX=\(event.scrollingDeltaX), deltaY=\(event.scrollingDeltaY)")
+        }
+
+        mtkView.onMagnify = { event in
+            context.coordinator.workspace.zoom(event.magnification)
+            mtkView.setNeedsDisplay(mtkView.bounds)
+            print("Magnification: \(event.magnification)")
+        }
+
+        mtkView.onRotate = { event in
+            print("Rotation: \(event.rotation)")
+        }
+
+        return mtkView
+    }
+
+    func updateNSView(_ nsView: NSViewType, context: Context) {
+
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
 }

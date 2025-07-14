@@ -19,7 +19,7 @@ struct ContentView: View {
                 Text("Eraser").tag(1)
             }
             .pickerStyle(.radioGroup)
-            SkiaView()
+            WorkspaceView()
             VStack {
                 Button {
 

@@ -15,5 +15,8 @@
 
 # 추가 명령
 
--  **Xcode 프로젝트 생성**
-`bazel run //ciart_studio/mac:xcodeproj`
+- **Xcode 프로젝트 생성**
+`bazel run //mac:xcodeproj`
+
+- **bazel clean**
+`bazel clean --expunge`

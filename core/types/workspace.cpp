@@ -1,6 +1,12 @@
 #include "workspace.h"
+#include "layer.h"
 
 using namespace Ciart::Studio;
+
+Workspace::Workspace() {
+    this->layers.push_back(new BitmapLayer("Layer 1"));
+}
+
 
 void Workspace::move(double dx, double dy) {
     offset.dx += dx;

@@ -1,7 +1,7 @@
-build --cxxopt='-std=c++17'
-build --objccopt='-std=c++17'
+build --cxxopt='-std=c++20'
+build --objccopt='-std=c++20'
 
 build:windows --extra_toolchains=@local_config_cc//:cc-toolchain-x64_windows-clang-cl
 build:windows --extra_execution_platforms=//:x64_windows-clang-cl
 build:windows --compiler=clang-cl
-build:windows --cxxopt='/std:c++17'
+build:windows --cxxopt='/std:c++20'
