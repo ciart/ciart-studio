@@ -4,6 +4,7 @@
 
 #include "workspace_renderer.h"
 #include "types/workspace_context.h"
+#include "types/layer.h"
 
 #include "include/core/SkBitmap.h"
 #include "include/core/SkCanvas.h"
@@ -61,15 +62,22 @@ void WorkspaceRenderer::draw(void* texture, double width, double height) {
     Offset screen_center = {width / 2, height / 2};
     Offset workspace_center = {size.width / 2, size.height / 2};
 
-    SkRect rect = SkRect::MakeXYWH( screen_center.dx - workspace_center.dx * scale + offset.dx, screen_center.dy - workspace_center.dy * scale + offset.dy, size.width * scale, size.height * scale);
+    double workspace_offset_x = screen_center.dx - workspace_center.dx * scale + offset.dx;
+    double workspace_offset_y = screen_center.dy - workspace_center.dy * scale + offset.dy;
 
-    SkPaint paint;
-    paint.setColor(SK_ColorWHITE);
-    paint.setAntiAlias(true);
-    paint.setStyle(SkPaint::kFill_Style);
-    paint.setStrokeWidth(5);
+    // 워크스페이스 배경
+    SkRect workspace_rect = SkRect::MakeXYWH(workspace_offset_x, workspace_offset_y, size.width * scale, size.height * scale);
+    SkPaint bg_paint;
+    bg_paint.setColor(SK_ColorWHITE);
+    bg_paint.setAntiAlias(true);
+    bg_paint.setStyle(SkPaint::kFill_Style);
+    canvas->drawRect(workspace_rect, bg_paint);
 
-    canvas->drawRect(rect, paint);
+    // 레이어들 렌더링
+    const auto& layers = workspaceContext->getLayers();
+    for (auto* layer : layers) {
+        layer->render(canvas);
+    }
 
     // printf("ready to snap the GPU calls\n");
     // Now to send the draws to the GPU

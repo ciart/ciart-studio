@@ -17,5 +17,7 @@ namespace Ciart::Studio {
     private:
         std::shared_ptr<WorkspaceContext> workspaceContext;
         std::unique_ptr<skgpu::graphite::Context> context = nullptr;
+        
+        sk_sp<SkSurface> createSurface(std::unique_ptr<skgpu::graphite::Recorder>& recorder, int width, int height);
     };
 }
