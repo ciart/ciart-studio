@@ -3,6 +3,7 @@
 //
 
 #include "workspace_renderer.h"
+#include "types/workspace_context.h"
 
 #include "include/core/SkBitmap.h"
 #include "include/core/SkCanvas.h"
@@ -22,7 +23,8 @@
 
 using namespace Ciart::Studio;
 
-WorkspaceRenderer::WorkspaceRenderer(void* device, void* commandQueue) {
+WorkspaceRenderer::WorkspaceRenderer(std::shared_ptr<WorkspaceContext> workspaceContext, void* device, void* commandQueue)
+    : workspaceContext(workspaceContext) {
     skgpu::graphite::MtlBackendContext backendContext = {};
     skgpu::graphite::ContextOptions options;
 
@@ -36,7 +38,7 @@ WorkspaceRenderer::WorkspaceRenderer(void* device, void* commandQueue) {
     }
 }
 
-void WorkspaceRenderer::draw(Workspace& workspace, void* texture, double width, double height) {
+void WorkspaceRenderer::draw(void* texture, double width, double height) {
     auto backendTexture = skgpu::graphite::BackendTextures::MakeMetal(SkISize::Make(width, height), (CFTypeRef)texture);
 
     std::unique_ptr<skgpu::graphite::Recorder> recorder = context->makeRecorder();
@@ -53,9 +55,9 @@ void WorkspaceRenderer::draw(Workspace& workspace, void* texture, double width, 
     SkCanvas* canvas = surface->getCanvas();
     canvas->clear(SK_ColorBLACK);
 
-    Offset offset = workspace.getOffset();
-    double scale = workspace.getScale() * workspace.getScale();
-    Size size = workspace.getSize();
+    Offset offset = workspaceContext->getOffset();
+    double scale = workspaceContext->getScale() * workspaceContext->getScale();
+    Size size = workspaceContext->getSize();
     Offset screen_center = {width / 2, height / 2};
     Offset workspace_center = {size.width / 2, size.height / 2};
 

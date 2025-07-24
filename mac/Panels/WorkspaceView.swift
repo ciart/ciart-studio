@@ -74,7 +74,7 @@ struct WorkspaceView: NSViewRepresentable {
         var device: MTLDevice!
         var commandQueue: MTLCommandQueue!
         var workspace: Workspace!
-        var workspaceRenderer: WorkspaceRenderer!
+        var workspaceRenderer: UnsafeMutablePointer<WorkspaceRenderer>!
 
         init(_ parent: WorkspaceView) {
             self.parent = parent
@@ -82,7 +82,7 @@ struct WorkspaceView: NSViewRepresentable {
             self.commandQueue = self.device.makeCommandQueue()
 
             self.workspace = Workspace()
-            self.workspaceRenderer = WorkspaceRenderer(
+            self.workspaceRenderer = self.workspace.createRenderer(
                 Unmanaged.passUnretained(device).toOpaque(),
                 Unmanaged.passUnretained(commandQueue).toOpaque())
 
@@ -98,8 +98,7 @@ struct WorkspaceView: NSViewRepresentable {
 
             let commandBuffer = commandQueue.makeCommandBuffer()
             
-            workspaceRenderer?.draw(
-                &workspace!,
+            workspaceRenderer?.pointee.draw(
                 Unmanaged.passUnretained(drawable.texture).toOpaque(),
                 drawable.layer.drawableSize.width, drawable.layer.drawableSize.height)
 

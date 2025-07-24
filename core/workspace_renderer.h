@@ -7,15 +7,15 @@
 #include "include/gpu/graphite/Recorder.h"
 #include "include/gpu/graphite/mtl/MtlGraphiteUtils.h"
 
-#include "types/workspace.h"
-
 namespace Ciart::Studio {
+    class WorkspaceContext;
     class WorkspaceRenderer {
     public:
-        WorkspaceRenderer(void* device, void* commandQueue);
-        void draw(Workspace& workspace, void* texture, double width, double height);
+        WorkspaceRenderer(std::shared_ptr<WorkspaceContext> context, void* device, void* commandQueue);
+        void draw(void* texture, double width, double height);
 
     private:
+        std::shared_ptr<WorkspaceContext> workspaceContext;
         std::unique_ptr<skgpu::graphite::Context> context = nullptr;
     };
 }

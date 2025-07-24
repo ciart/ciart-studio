@@ -1,35 +1,43 @@
 #pragma once
 
 #include <vector>
+#include <memory>
+
+#include <swift/bridging>
 
 #include "size.h"
 #include "offset.h"
 #include "layer.h"
+#include "workspace_context.h"
 
 #define MIN_SCALE 0.5
 
 namespace Ciart::Studio {
+    class WorkspaceRenderer;
+    
     class Workspace {
     public:
         Workspace();
         
-        const Size& getSize() const { return size; }
-        const Offset& getOffset() const { return offset; }
-        double getAngle() const { return angle; }
-        double getScale() const { return scale; }
+        const Size& getSize() const { return context->getSize(); }
+        const Offset& getOffset() const { return context->getOffset(); }
+        double getAngle() const { return context->getAngle(); }
+        double getScale() const { return context->getScale(); }
+        const std::vector<ILayer*>& getLayers() const { return context->getLayers(); }
         
-        void setSize(const Size& size) { this->size = size; }
-        void setOffset(const Offset& offset) { this->offset = offset; }
-        void setAngle(double angle) { this->angle = angle; }
-        void setScale(double scale) { this->scale = scale; }
+        void setSize(const Size& size) { context->setSize(size); }
+        void setOffset(const Offset& offset) { context->setOffset(offset); }
+        void setAngle(double angle) { context->setAngle(angle); }
+        void setScale(double scale) { context->setScale(scale); }
+        void setLayers(const std::vector<ILayer*>& layers) { context->setLayers(layers); }
 
         void move(double dx, double dy);
         void zoom(double magnification);
+        
+        WorkspaceRenderer& createRenderer(void* device, void* commandQueue) SWIFT_RETURNS_INDEPENDENT_VALUE;
+        
     private:
-        Size size {100, 100};
-        Offset offset {0, 0};
-        double angle = 0.0;
-        double scale = 1.0;
-        std::vector<ILayer*> layers;
+        std::unique_ptr<WorkspaceRenderer> renderer;
+        std::shared_ptr<WorkspaceContext> context;
     };
 }
