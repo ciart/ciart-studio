@@ -40,19 +40,12 @@ WorkspaceRenderer::WorkspaceRenderer(std::shared_ptr<WorkspaceContext> workspace
 }
 
 void WorkspaceRenderer::draw(void* texture, double width, double height) {
-    auto backendTexture = skgpu::graphite::BackendTextures::MakeMetal(SkISize::Make(width, height), (CFTypeRef)texture);
-
     std::unique_ptr<skgpu::graphite::Recorder> recorder = context->makeRecorder();
     if (!recorder) {
         throw std::runtime_error("Could not make recorder");
     }
 
-    sk_sp<SkSurface> surface =
-            SkSurfaces::WrapBackendTexture(recorder.get(), backendTexture, kBGRA_8888_SkColorType, SkColorSpace::MakeSRGB(), new SkSurfaceProps());
-    if (!surface) {
-        throw std::runtime_error("Could not make surface from Metal Recorder");
-    }
-
+    sk_sp<SkSurface> surface = createBackendSurface(texture, width, height, recorder.get());
     SkCanvas* canvas = surface->getCanvas();
     canvas->clear(SK_ColorBLACK);
 
@@ -65,41 +58,70 @@ void WorkspaceRenderer::draw(void* texture, double width, double height) {
     double workspace_offset_x = screen_center.dx - workspace_center.dx * scale + offset.dx;
     double workspace_offset_y = screen_center.dy - workspace_center.dy * scale + offset.dy;
 
-    // 워크스페이스 배경
     SkRect workspace_rect = SkRect::MakeXYWH(workspace_offset_x, workspace_offset_y, size.width * scale, size.height * scale);
+    renderWorkspaceBackground(canvas, workspace_rect);
+
+    renderLayers(canvas, workspace_rect);
+
+    submitRecording(std::move(recorder));
+}
+
+sk_sp<SkSurface> WorkspaceRenderer::createBackendSurface(void* texture, double width, double height, skgpu::graphite::Recorder* recorder) {
+    auto backendTexture = skgpu::graphite::BackendTextures::MakeMetal(SkISize::Make(width, height), (CFTypeRef)texture);
+
+    sk_sp<SkSurface> surface = SkSurfaces::WrapBackendTexture(
+        recorder, backendTexture, kBGRA_8888_SkColorType,
+        SkColorSpace::MakeSRGB(), new SkSurfaceProps());
+
+    if (!surface) {
+        throw std::runtime_error("Could not make surface from Metal Recorder");
+    }
+
+    return surface;
+}
+
+void WorkspaceRenderer::renderWorkspaceBackground(SkCanvas* canvas, const SkRect& workspace_rect) {
     SkPaint bg_paint;
     bg_paint.setColor(SK_ColorWHITE);
     bg_paint.setAntiAlias(true);
     bg_paint.setStyle(SkPaint::kFill_Style);
     canvas->drawRect(workspace_rect, bg_paint);
+}
 
-    // 레이어들 렌더링
-    const auto& layers = workspaceContext->getLayers();
-    for (auto* layer : layers) {
-        layer->render(canvas);
+void WorkspaceRenderer::renderLayers(SkCanvas* canvas, const SkRect& dest_rect) {
+    Size workspace_size = workspaceContext->getSize();
+    sk_sp<SkSurface> layer_surface = canvas->getSurface()->makeSurface(workspace_size.width, workspace_size.height);
+
+    if (!layer_surface) {
+        throw std::runtime_error("Could not create layer surface");
     }
 
-    // printf("ready to snap the GPU calls\n");
-    // Now to send the draws to the GPU
+    SkCanvas* layer_canvas = layer_surface->getCanvas();
+    layer_canvas->clear(SK_ColorTRANSPARENT);
+
+    const auto& layers = workspaceContext->getLayers();
+    for (auto* layer : layers) {
+        layer->render(layer_canvas);
+    }
+
+    sk_sp<SkImage> layer_image = layer_surface->makeImageSnapshot();
+    canvas->drawImageRect(layer_image, dest_rect, SkSamplingOptions());
+}
+
+void WorkspaceRenderer::submitRecording(std::unique_ptr<skgpu::graphite::Recorder> recorder) {
     std::unique_ptr<skgpu::graphite::Recording> recording = recorder->snap();
     if (!recording) {
         throw std::runtime_error("Could not create a recording");
     }
+
     skgpu::graphite::InsertRecordingInfo info;
     info.fRecording = recording.get();
     if (!context->insertRecording(info)) {
         throw std::runtime_error("Context::insertRecording failed");
     }
 
-    // printf("Submitting work to GPU and waiting for it to be done\n");
-    // Note this doesn't work on all backend types, e.g. Dawn.
     context->submit(skgpu::graphite::SyncToCpu::kYes);
     if (context->hasUnfinishedGpuWork()) {
         throw std::runtime_error("Sync with GPU completion failed");
     }
-
-    // sk_sp<SkData> jpeg = SkJpegEncoder::Encode(nullptr, img.get(), {});
-    // if (!jpeg) {
-    //     throw std::runtime_error("Encoding failed");
-    // }
 }

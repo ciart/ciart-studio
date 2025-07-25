@@ -90,14 +90,14 @@ struct WorkspaceView: NSViewRepresentable {
         }
 
         func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-//            workspaceRenderer?.resize(size.width, size.height)
+            //            workspaceRenderer?.resize(size.width, size.height)
         }
 
         func draw(in view: MTKView) {
             guard let drawable = view.currentDrawable else { return }
 
             let commandBuffer = commandQueue.makeCommandBuffer()
-            
+
             workspaceRenderer?.pointee.draw(
                 Unmanaged.passUnretained(drawable.texture).toOpaque(),
                 drawable.layer.drawableSize.width, drawable.layer.drawableSize.height)
@@ -151,9 +151,11 @@ struct WorkspaceView: NSViewRepresentable {
             } else {
                 context.coordinator.workspace.zoom(event.scrollingDeltaY)
             }
-            
+
             mtkView.setNeedsDisplay(mtkView.bounds)
-            print("Scroll: precise=\(event.hasPreciseScrollingDeltas), deltaX=\(event.scrollingDeltaX), deltaY=\(event.scrollingDeltaY)")
+            print(
+                "Scroll: precise=\(event.hasPreciseScrollingDeltas), deltaX=\(event.scrollingDeltaX), deltaY=\(event.scrollingDeltaY)"
+            )
         }
 
         mtkView.onMagnify = { event in
@@ -176,4 +178,8 @@ struct WorkspaceView: NSViewRepresentable {
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
+}
+
+#Preview {
+    WorkspaceView().frame(width: 400, height: 300)
 }
