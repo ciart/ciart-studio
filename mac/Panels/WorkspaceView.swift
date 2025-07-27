@@ -68,6 +68,7 @@ class CustomMTKView: MTKView {
 
 struct WorkspaceView: NSViewRepresentable {
     typealias NSViewType = CustomMTKView
+    @Binding var statusMessage: String
 
     class Coordinator: NSObject, MTKViewDelegate {
         var parent: WorkspaceView
@@ -127,22 +128,22 @@ struct WorkspaceView: NSViewRepresentable {
         // Set up event handlers
         mtkView.onMouseMoved = { event in
             let location = mtkView.convert(event.locationInWindow, from: nil)
-            print("Mouse moved to: \(location)")
+            self.statusMessage = "Mouse moved to: \(location)"
         }
 
         mtkView.onMouseDown = { event in
             let location = mtkView.convert(event.locationInWindow, from: nil)
-            print("Mouse down at: \(location)")
+            self.statusMessage = "Mouse down at: \(location)"
         }
 
         mtkView.onMouseUp = { event in
             let location = mtkView.convert(event.locationInWindow, from: nil)
-            print("Mouse up at: \(location)")
+            self.statusMessage = "Mouse up at: \(location)"
         }
 
         mtkView.onMouseDragged = { event in
             let location = mtkView.convert(event.locationInWindow, from: nil)
-            print("Mouse dragged to: \(location)")
+            self.statusMessage = "Mouse dragged to: \(location)"
         }
 
         mtkView.onScrollWheel = { event in
@@ -153,19 +154,17 @@ struct WorkspaceView: NSViewRepresentable {
             }
 
             mtkView.setNeedsDisplay(mtkView.bounds)
-            print(
-                "Scroll: precise=\(event.hasPreciseScrollingDeltas), deltaX=\(event.scrollingDeltaX), deltaY=\(event.scrollingDeltaY)"
-            )
+            self.statusMessage = "Scroll: precise=\(event.hasPreciseScrollingDeltas), deltaX=\(event.scrollingDeltaX), deltaY=\(event.scrollingDeltaY)"
         }
 
         mtkView.onMagnify = { event in
             context.coordinator.workspace.zoom(event.magnification)
             mtkView.setNeedsDisplay(mtkView.bounds)
-            print("Magnification: \(event.magnification)")
+            self.statusMessage = "Magnification: \(event.magnification)"
         }
 
         mtkView.onRotate = { event in
-            print("Rotation: \(event.rotation)")
+            self.statusMessage = "Rotation: \(event.rotation)"
         }
 
         return mtkView
@@ -181,5 +180,5 @@ struct WorkspaceView: NSViewRepresentable {
 }
 
 #Preview {
-    WorkspaceView().frame(width: 400, height: 300)
+    WorkspaceView(statusMessage: .constant("Preview message")).frame(width: 400, height: 300)
 }

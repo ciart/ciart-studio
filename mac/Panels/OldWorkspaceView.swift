@@ -105,5 +105,5 @@ struct OldWorkspaceView: NSViewRepresentable {
 }
 
 #Preview {
-    WorkspaceView().frame(width: 400, height: 300)
+    WorkspaceView(statusMessage: .constant("Preview message")).frame(width: 400, height: 300)
 }

@@ -10,24 +10,27 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var toolStore: ToolStore
     @State private var selectedColor: Color = .blue
+    @State private var statusMessage: String = "Ready"
 
     var body: some View {
-
-        HStack {
-            Picker(selection: $toolStore.selectedIndex, label: Text("")) {
-                Text("Pen").tag(0)
-                Text("Eraser").tag(1)
-            }
-            .pickerStyle(.radioGroup)
-            WorkspaceView()
-            VStack {
-                Button {
-
-                } label: {
-                    Text("Eraser")
+        VStack(spacing: 0) {
+            HStack {
+                Picker(selection: $toolStore.selectedIndex, label: Text("")) {
+                    Text("Pen").tag(0)
+                    Text("Eraser").tag(1)
                 }
-                ColorPicker("색상 선택", selection: $selectedColor)
+                .pickerStyle(.radioGroup)
+                WorkspaceView(statusMessage: $statusMessage)
+                VStack {
+                    Button {
+
+                    } label: {
+                        Text("Eraser")
+                    }
+                    ColorPicker("색상 선택", selection: $selectedColor)
+                }
             }
+            StatusBar(message: statusMessage)
         }
     }
 }
