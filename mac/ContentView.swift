@@ -14,26 +14,29 @@ struct ContentView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            HSplitView {
-                SidePanelView(title: "Project") {
-                    Picker(selection: $toolStore.selectedIndex, label: Text("")) {
-                        Text("Pen").tag(0)
-                        Text("Eraser").tag(1)
+            HStack(spacing: 0) {
+                ToolbarView()
+                HSplitView {
+                    SidePanelView(title: "Project") {
+                        VStack {
+                            Text("선택된 도구: \(toolStore.selectedIndex == 0 ? "연필" : "지우개")")
+                                .foregroundColor(.white)
+                            Spacer()
+                        }
+                        .frame(minWidth:200, idealWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
                     }
-                    .pickerStyle(.radioGroup)
-                    .frame(minWidth:200, idealWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
+                    WorkspaceView(statusMessage: $statusMessage)
+                        .layoutPriority(1)
+                        .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
+                    SidePanelView(title: "Color Picker") {
+                        VStack {
+                            ColorPickerPanelView()
+                            ColorPicker("색상 선택", selection: $selectedColor)
+                        }.frame(minWidth: 200, idealWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
+                    }
                 }
-                WorkspaceView(statusMessage: $statusMessage)
-                    .layoutPriority(1)
-                    .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
-                SidePanelView(title: "Color Picker") {
-                    VStack {
-                        ColorPickerPanelView()
-                        ColorPicker("색상 선택", selection: $selectedColor)
-                    }.frame(minWidth: 200, idealWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
-                }
+                .frame(maxHeight: .infinity)
             }
-            .frame(maxHeight: .infinity)
             StatusBar(message: statusMessage)
         }
         .frame(maxHeight: .infinity)
