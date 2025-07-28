@@ -14,7 +14,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "01007D5B03C6000000000001"
+                     BlueprintIdentifier = "0100668EAECC000000000001"
                      BuildableName = "coretext_typeface"
                      BlueprintName = "coretext_typeface"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -30,7 +30,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "01007D5B03C6000000000001"
+                     BlueprintIdentifier = "0100668EAECC000000000001"
                      BuildableName = "coretext_typeface"
                      BlueprintName = "coretext_typeface"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -48,7 +48,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "01007D5B03C6000000000001"
+               BlueprintIdentifier = "0100668EAECC000000000001"
                BuildableName = "coretext_typeface"
                BlueprintName = "coretext_typeface"
                ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">

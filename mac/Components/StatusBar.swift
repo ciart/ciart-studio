@@ -11,9 +11,7 @@ struct StatusBar: View {
                 .padding(.horizontal, 8)
             Spacer()
         }
-        .frame(height: 24)
-        .background(Color(NSColor.controlBackgroundColor))
-        .border(Color(NSColor.separatorColor), width: 0.5)
+        .frame(height: 30)
     }
 }
 

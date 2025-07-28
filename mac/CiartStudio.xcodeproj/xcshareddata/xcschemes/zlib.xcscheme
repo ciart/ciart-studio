@@ -14,7 +14,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "07000E0C88CA000000000001"
+                     BlueprintIdentifier = "0700F024FC32000000000001"
                      BuildableName = "zlib"
                      BlueprintName = "zlib"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -30,7 +30,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "07000E0C88CA000000000001"
+                     BlueprintIdentifier = "0700F024FC32000000000001"
                      BuildableName = "zlib"
                      BlueprintName = "zlib"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -48,7 +48,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "07000E0C88CA000000000001"
+               BlueprintIdentifier = "0700F024FC32000000000001"
                BuildableName = "zlib"
                BlueprintName = "zlib"
                ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">

@@ -14,7 +14,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "0100C0BF0691000000000001"
+                     BlueprintIdentifier = "01001654908C000000000001"
                      BuildableName = "gpu_mtl"
                      BlueprintName = "gpu_mtl"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -30,7 +30,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "0100C0BF0691000000000001"
+                     BlueprintIdentifier = "01001654908C000000000001"
                      BuildableName = "gpu_mtl"
                      BlueprintName = "gpu_mtl"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -48,7 +48,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0100C0BF0691000000000001"
+               BlueprintIdentifier = "01001654908C000000000001"
                BuildableName = "gpu_mtl"
                BlueprintName = "gpu_mtl"
                ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">

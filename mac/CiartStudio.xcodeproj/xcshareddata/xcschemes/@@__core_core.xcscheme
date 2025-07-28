@@ -14,7 +14,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "04006A8AAE32000000000001"
+                     BlueprintIdentifier = "04001C5A8389000000000001"
                      BuildableName = "@@//core:core"
                      BlueprintName = "@@//core:core"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -30,7 +30,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "04006A8AAE32000000000001"
+                     BlueprintIdentifier = "04001C5A8389000000000001"
                      BuildableName = "@@//core:core"
                      BlueprintName = "@@//core:core"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -48,7 +48,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "04006A8AAE32000000000001"
+               BlueprintIdentifier = "04001C5A8389000000000001"
                BuildableName = "@@//core:core"
                BlueprintName = "@@//core:core"
                ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">

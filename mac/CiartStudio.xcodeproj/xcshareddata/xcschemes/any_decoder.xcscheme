@@ -14,7 +14,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "05001403F002000000000001"
+                     BlueprintIdentifier = "0500855942AA000000000001"
                      BuildableName = "any_decoder"
                      BlueprintName = "any_decoder"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -30,7 +30,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "05001403F002000000000001"
+                     BlueprintIdentifier = "0500855942AA000000000001"
                      BuildableName = "any_decoder"
                      BlueprintName = "any_decoder"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -48,7 +48,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "05001403F002000000000001"
+               BlueprintIdentifier = "0500855942AA000000000001"
                BuildableName = "any_decoder"
                BlueprintName = "any_decoder"
                ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">

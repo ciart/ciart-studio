@@ -14,7 +14,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "0700DC097626000000000001"
+                     BlueprintIdentifier = "07001540FDF4000000000001"
                      BuildableName = "skshaper_core"
                      BlueprintName = "skshaper_core"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -30,7 +30,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "0700DC097626000000000001"
+                     BlueprintIdentifier = "07001540FDF4000000000001"
                      BuildableName = "skshaper_core"
                      BlueprintName = "skshaper_core"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -48,7 +48,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0700DC097626000000000001"
+               BlueprintIdentifier = "07001540FDF4000000000001"
                BuildableName = "skshaper_core"
                BlueprintName = "skshaper_core"
                ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">

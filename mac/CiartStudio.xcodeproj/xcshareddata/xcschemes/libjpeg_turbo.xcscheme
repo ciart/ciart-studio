@@ -14,7 +14,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "0900CF900B2F000000000001"
+                     BlueprintIdentifier = "09009F3A8EFF000000000001"
                      BuildableName = "libjpeg_turbo"
                      BlueprintName = "libjpeg_turbo"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -30,7 +30,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "0900CF900B2F000000000001"
+                     BlueprintIdentifier = "09009F3A8EFF000000000001"
                      BuildableName = "libjpeg_turbo"
                      BlueprintName = "libjpeg_turbo"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -48,7 +48,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0900CF900B2F000000000001"
+               BlueprintIdentifier = "09009F3A8EFF000000000001"
                BuildableName = "libjpeg_turbo"
                BlueprintName = "libjpeg_turbo"
                ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">

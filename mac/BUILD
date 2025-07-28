@@ -40,7 +40,7 @@ macos_application(
     #    app_icons = ["Resources:MacAppIcon.xcassets"],
     bundle_id = "com.ciart.studio",
     infoplists = [":Info.plist"],
-    minimum_os_version = "12.0",
+    minimum_os_version = "15.0",
     version = ":ciart_studio_version",
     visibility = ["//visibility:public"],
     deps = [":sources"],

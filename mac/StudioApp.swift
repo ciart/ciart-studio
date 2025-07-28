@@ -12,6 +12,7 @@ struct StudioApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView().environmentObject(ToolStore()).environmentObject(DocumentStore())
+                .toolbarBackgroundVisibility(.hidden, for: .windowToolbar)
         }
     }
 }

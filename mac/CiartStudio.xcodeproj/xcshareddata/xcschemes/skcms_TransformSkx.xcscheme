@@ -14,7 +14,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "0200AECE9A30000000000001"
+                     BlueprintIdentifier = "02001096A9A6000000000001"
                      BuildableName = "skcms_TransformSkx"
                      BlueprintName = "skcms_TransformSkx"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -30,7 +30,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "0200AECE9A30000000000001"
+                     BlueprintIdentifier = "02001096A9A6000000000001"
                      BuildableName = "skcms_TransformSkx"
                      BlueprintName = "skcms_TransformSkx"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -48,7 +48,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0200AECE9A30000000000001"
+               BlueprintIdentifier = "02001096A9A6000000000001"
                BuildableName = "skcms_TransformSkx"
                BlueprintName = "skcms_TransformSkx"
                ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">

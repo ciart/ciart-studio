@@ -14,7 +14,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "05004E6701D0000000000001"
+                     BlueprintIdentifier = "05007487CB11000000000001"
                      BuildableName = "icc_support"
                      BlueprintName = "icc_support"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -30,7 +30,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "05004E6701D0000000000001"
+                     BlueprintIdentifier = "05007487CB11000000000001"
                      BuildableName = "icc_support"
                      BlueprintName = "icc_support"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -48,7 +48,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "05004E6701D0000000000001"
+               BlueprintIdentifier = "05007487CB11000000000001"
                BuildableName = "icc_support"
                BlueprintName = "icc_support"
                ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">

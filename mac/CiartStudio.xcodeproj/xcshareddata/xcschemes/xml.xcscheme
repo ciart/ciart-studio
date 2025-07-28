@@ -14,7 +14,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "05003926E7FD000000000001"
+                     BlueprintIdentifier = "0500ECFBBA8F000000000001"
                      BuildableName = "xml"
                      BlueprintName = "xml"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -30,7 +30,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "05003926E7FD000000000001"
+                     BlueprintIdentifier = "0500ECFBBA8F000000000001"
                      BuildableName = "xml"
                      BlueprintName = "xml"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -48,7 +48,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "05003926E7FD000000000001"
+               BlueprintIdentifier = "0500ECFBBA8F000000000001"
                BuildableName = "xml"
                BlueprintName = "xml"
                ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">

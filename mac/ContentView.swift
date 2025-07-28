@@ -14,24 +14,30 @@ struct ContentView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                Picker(selection: $toolStore.selectedIndex, label: Text("")) {
-                    Text("Pen").tag(0)
-                    Text("Eraser").tag(1)
-                }
-                .pickerStyle(.radioGroup)
-                WorkspaceView(statusMessage: $statusMessage)
-                VStack {
-                    Button {
-
-                    } label: {
-                        Text("Eraser")
+            HSplitView {
+                SidePanelView(title: "Project") {
+                    Picker(selection: $toolStore.selectedIndex, label: Text("")) {
+                        Text("Pen").tag(0)
+                        Text("Eraser").tag(1)
                     }
-                    ColorPicker("색상 선택", selection: $selectedColor)
+                    .pickerStyle(.radioGroup)
+                    .frame(minWidth:200, idealWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
+                }
+                WorkspaceView(statusMessage: $statusMessage)
+                    .layoutPriority(1)
+                    .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
+                SidePanelView(title: "Color Picker") {
+                    VStack {
+                        ColorPickerPanelView()
+                        ColorPicker("색상 선택", selection: $selectedColor)
+                    }.frame(minWidth: 200, idealWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
+            .frame(maxHeight: .infinity)
             StatusBar(message: statusMessage)
         }
+        .frame(maxHeight: .infinity)
+        .background(Color.black)
     }
 }
 

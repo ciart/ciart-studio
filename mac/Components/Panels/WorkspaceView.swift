@@ -91,7 +91,7 @@ struct WorkspaceView: NSViewRepresentable {
         }
 
         func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-            //            workspaceRenderer?.resize(size.width, size.height)
+            
         }
 
         func draw(in view: MTKView) {
@@ -171,7 +171,7 @@ struct WorkspaceView: NSViewRepresentable {
     }
 
     func updateNSView(_ nsView: NSViewType, context: Context) {
-
+        
     }
 
     func makeCoordinator() -> Coordinator {

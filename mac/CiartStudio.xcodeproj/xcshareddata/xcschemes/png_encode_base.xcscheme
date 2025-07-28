@@ -14,7 +14,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "0100A31AD531000000000001"
+                     BlueprintIdentifier = "01008DB4B603000000000001"
                      BuildableName = "png_encode_base"
                      BlueprintName = "png_encode_base"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -30,7 +30,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "0100A31AD531000000000001"
+                     BlueprintIdentifier = "01008DB4B603000000000001"
                      BuildableName = "png_encode_base"
                      BlueprintName = "png_encode_base"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -48,7 +48,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0100A31AD531000000000001"
+               BlueprintIdentifier = "01008DB4B603000000000001"
                BuildableName = "png_encode_base"
                BlueprintName = "png_encode_base"
                ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">

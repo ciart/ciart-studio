@@ -14,7 +14,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "0800A76E1977000000000001"
+                     BlueprintIdentifier = "080069719A15000000000001"
                      BuildableName = "libpng"
                      BlueprintName = "libpng"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -30,7 +30,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "0800A76E1977000000000001"
+                     BlueprintIdentifier = "080069719A15000000000001"
                      BuildableName = "libpng"
                      BlueprintName = "libpng"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -48,7 +48,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0800A76E1977000000000001"
+               BlueprintIdentifier = "080069719A15000000000001"
                BuildableName = "libpng"
                BlueprintName = "libpng"
                ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">

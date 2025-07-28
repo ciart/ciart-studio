@@ -14,7 +14,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "06008986286F000000000001"
+                     BlueprintIdentifier = "0600B767D4BA000000000001"
                      BuildableName = "expat"
                      BlueprintName = "expat"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -30,7 +30,7 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "06008986286F000000000001"
+                     BlueprintIdentifier = "0600B767D4BA000000000001"
                      BuildableName = "expat"
                      BlueprintName = "expat"
                      ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
@@ -48,7 +48,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "06008986286F000000000001"
+               BlueprintIdentifier = "0600B767D4BA000000000001"
                BuildableName = "expat"
                BlueprintName = "expat"
                ReferencedContainer = "container:../../../../../../../../Users/pdom/Developments/ciart-studio/mac/CiartStudio.xcodeproj">
