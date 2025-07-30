@@ -22,6 +22,7 @@ namespace Ciart::Studio {
         sk_sp<SkSurface> createBackendSurface(void* texture, double width, double height, skgpu::graphite::Recorder* recorder);
         void renderWorkspaceBackground(SkCanvas* canvas, const SkRect& workspace_rect);
         void renderLayers(SkCanvas* canvas, const SkRect& dest_rect);
+        void renderToolPreview(SkCanvas* canvas, const SkRect& workspace_rect);
         void submitRecording(std::unique_ptr<skgpu::graphite::Recorder> recorder);
     };
 }

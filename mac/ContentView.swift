@@ -17,12 +17,64 @@ struct ContentView: View {
             HStack(spacing: 0) {
                 ToolbarView()
                 HSplitView {
-                    SidePanelView(title: "Project") {
-                        VStack {
-                            Text("선택된 도구: \(toolStore.selectedIndex == 0 ? "연필" : "지우개")")
-                                .foregroundColor(.white)
+                    SidePanelView(title: "Tool Property") {
+                        VStack(alignment: .leading, spacing: 16) {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("선택된 도구")
+                                    .foregroundColor(.white)
+                                    .font(.headline)
+                                
+                                Text(toolStore.selectedIndex == 0 ? "연필" : "지우개")
+                                    .foregroundColor(.gray)
+                                    .font(.subheadline)
+                            }
+                            
+                            Divider()
+                                .background(Color.gray)
+                            
+                            VStack(alignment: .leading, spacing: 12) {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("도구 크기")
+                                        .foregroundColor(.white)
+                                        .font(.subheadline)
+                                    
+                                    HStack {
+                                        Slider(value: Binding(
+                                            get: { toolStore.toolSize },
+                                            set: { toolStore.setToolSize($0) }
+                                        ), in: 1...50)
+                                        .accentColor(.blue)
+                                        
+                                        Text("\(Int(toolStore.toolSize))")
+                                            .foregroundColor(.gray)
+                                            .font(.caption)
+                                            .frame(width: 25, alignment: .trailing)
+                                    }
+                                }
+                                
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("불투명도")
+                                        .foregroundColor(.white)
+                                        .font(.subheadline)
+                                    
+                                    HStack {
+                                        Slider(value: Binding(
+                                            get: { toolStore.toolOpacity },
+                                            set: { toolStore.setToolOpacity($0) }
+                                        ), in: 0.1...1.0)
+                                        .accentColor(.blue)
+                                        
+                                        Text("\(Int(toolStore.toolOpacity * 100))%")
+                                            .foregroundColor(.gray)
+                                            .font(.caption)
+                                            .frame(width: 35, alignment: .trailing)
+                                    }
+                                }
+                            }
+                            
                             Spacer()
                         }
+                        .padding()
                         .frame(minWidth:200, idealWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
                     }
                     WorkspaceView(statusMessage: $statusMessage)

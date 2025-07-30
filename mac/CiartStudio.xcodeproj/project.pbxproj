@@ -1781,6 +1781,7 @@
 				03FFF6A219BC05EC3AA60FB3 /* DocumentStore.swift in Sources */,
 				03FFCF2C49A343283A0A4828 /* ToolStore.swift in Sources */,
 				03FF7FE6E448D3F2C3543EE9 /* StudioApp.swift in Sources */,
+				03FFBB87999D3E26B4E8F9E6 /* ToolbarView.swift in Sources */,
 				03FF5CFFA0C5392B29E1E4E6 /* Eraser.swift in Sources */,
 				03FF4BDB2EA312DFEF144D5E /* Pen.swift in Sources */,
 				03FFD450D81E4A5A8493F0F0 /* Tool.swift in Sources */,
@@ -2060,6 +2061,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04FF15114318DCA34A6C8500 /* eraser_tool.cpp in Sources */,
+				04FF78B37726259761ED99F0 /* pen_tool.cpp in Sources */,
+				04FFBEDC12ECC074DA8F48C5 /* tool_manager.cpp in Sources */,
 				04FF6DD0409440E5988525E0 /* layer.cpp in Sources */,
 				04FFAFCC8C04571A6E4BC485 /* workspace.cpp in Sources */,
 				04FF0ED9C030E42DCBB3A55B /* workspace_renderer.cpp in Sources */,
@@ -4804,6 +4808,7 @@
 		FE04B8E36DE919EB223772DB /* SkSLModifierFlags.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkSLModifierFlags.h; sourceTree = "<group>"; };
 		FE04DC971C1CD2F49453252D /* SkHalf.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkHalf.cpp; sourceTree = "<group>"; };
 		FE04F966716A95F4F8CA7FC8 /* SkSVGGradient.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkSVGGradient.cpp; sourceTree = "<group>"; };
+		FE04FEFB1432374934849921 /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
 		FE0506CAFC8D3DB628ABDBDE /* SkSLTypeReference.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkSLTypeReference.cpp; sourceTree = "<group>"; };
 		FE051CF4804635828F8C78B3 /* SkConvertPixels.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkConvertPixels.cpp; sourceTree = "<group>"; };
 		FE055C5049710558353CA74B /* jdmainct.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = jdmainct.c; sourceTree = "<group>"; };
@@ -4814,6 +4819,8 @@
 				FE3D6D56F882643540CA8009 /* layer.h */,
 				FE3191F0989AB873154971D4 /* offset.h */,
 				FEF0C58DF36BA0FD1A4F03FA /* size.h */,
+				FE246831698D77446AC5736B /* tool_event.h */,
+				FE212EF5A5F8D91345B974EA /* tool.h */,
 				FE35A2C317B24C0720767640 /* workspace_context.h */,
 				FEF3BF9F5B8C4F1DE8B974E6 /* workspace.cpp */,
 				FE26B7B3029A1C61176DC564 /* workspace.h */,
@@ -4869,6 +4876,7 @@
 		FE0C023A1C0FDB89CBD59878 /* SkASAN.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkASAN.h; sourceTree = "<group>"; };
 		FE0C37E7A8F551ECDB4912DC /* SkAlphaType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkAlphaType.h; sourceTree = "<group>"; };
 		FE0C4F5FA95AE3A1C5BB509D /* SkSLModifierFlags.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkSLModifierFlags.cpp; sourceTree = "<group>"; };
+		FE0C8D418CB1B00D664A8F0E /* pen_tool.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pen_tool.cpp; sourceTree = "<group>"; };
 		FE0CB107D169BB1A4947E06B /* SkMipmapHQDownSampler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkMipmapHQDownSampler.cpp; sourceTree = "<group>"; };
 		FE0D2660EF166B6B5812F5E2 /* SkPathOps.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkPathOps.h; sourceTree = "<group>"; };
 		FE0D60520E09C338C914B4F9 /* SkSemaphore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkSemaphore.h; sourceTree = "<group>"; };
@@ -4926,6 +4934,7 @@
 		FE1476D822C78E15E46A4127 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				FE5503C38850EE2FB2DFC564 /* tools */,
 				FE05D4830210BDB314B4BFBC /* types */,
 				FE79C1C532F5393FA7D1AC2E /* BUILD */,
 				FEA4ABD71E0F1D7B082F5958 /* workspace_renderer.cpp */,
@@ -5051,6 +5060,7 @@
 		FE20992D6CAD060E75064F10 /* SkKnownRuntimeEffects.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkKnownRuntimeEffects.cpp; sourceTree = "<group>"; };
 		FE20CA64FE727561D811FA55 /* SkBlender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkBlender.h; sourceTree = "<group>"; };
 		FE20EBFE3D4DBB567431B633 /* SkDrawable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkDrawable.cpp; sourceTree = "<group>"; };
+		FE212EF5A5F8D91345B974EA /* tool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tool.h; sourceTree = "<group>"; };
 		FE21A638ECBFF26C95402A69 /* SkPictureImageFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkPictureImageFilter.cpp; sourceTree = "<group>"; };
 		FE21AF5B329682A6EA9714C1 /* SkBitmapProcState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkBitmapProcState.h; sourceTree = "<group>"; };
 		FE21C206830633E5AE7E1520 /* VerticesRenderStep.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VerticesRenderStep.cpp; sourceTree = "<group>"; };
@@ -5072,6 +5082,7 @@
 		FE2438C14D3F21FF960201BA /* SkPathOpsCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkPathOpsCommon.h; sourceTree = "<group>"; };
 		FE24399764ECFC8961B05A13 /* SkPathMakers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkPathMakers.h; sourceTree = "<group>"; };
 		FE2451609024A6EE8FCBD7BA /* SkChromeRemoteGlyphCache.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkChromeRemoteGlyphCache.cpp; sourceTree = "<group>"; };
+		FE246831698D77446AC5736B /* tool_event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tool_event.h; sourceTree = "<group>"; };
 		FE246B5A623661915D3C6395 /* SkPerlinNoiseShaderImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkPerlinNoiseShaderImpl.h; sourceTree = "<group>"; };
 		FE246F9EB159924EF51FBE40 /* SkSVGImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkSVGImage.h; sourceTree = "<group>"; };
 		FE24946F459EAFAA458BD44C /* private */ = {
@@ -6033,6 +6044,19 @@
 		FE54B3DE29DF0B6422B774FE /* SkSVGRect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkSVGRect.cpp; sourceTree = "<group>"; };
 		FE54BDB56038C54BC78B6892 /* SkMipmap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkMipmap.h; sourceTree = "<group>"; };
 		FE54D3A0CC6175EB3DCA6816 /* SkFixedArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkFixedArray.h; sourceTree = "<group>"; };
+		FE5503C38850EE2FB2DFC564 /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				FECE950CBED8CFC74687C82E /* eraser_tool.cpp */,
+				FEF8CAAD3FF65D4C48E0BAED /* eraser_tool.h */,
+				FE0C8D418CB1B00D664A8F0E /* pen_tool.cpp */,
+				FE8829E46317800EB54BBDB5 /* pen_tool.h */,
+				FE7FB04F4050C30FA4EED9B8 /* tool_manager.cpp */,
+				FEA88388703EEFB35ABD38DE /* tool_manager.h */,
+			);
+			path = tools;
+			sourceTree = "<group>";
+		};
 		FE550C6ED45CFD6158590486 /* SkQuads.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkQuads.cpp; sourceTree = "<group>"; };
 		FE55198C8BCA85E09F2A83AF /* SkDraw_text.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkDraw_text.cpp; sourceTree = "<group>"; };
 		FE555B07D644E2098F14437A /* SkRegionPriv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkRegionPriv.h; sourceTree = "<group>"; };
@@ -6729,6 +6753,7 @@
 			path = expat;
 			sourceTree = "<group>";
 		};
+		FE7FB04F4050C30FA4EED9B8 /* tool_manager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tool_manager.cpp; sourceTree = "<group>"; };
 		FE7FF1093D530D93881920B9 /* SkSLEliminateDeadGlobalVariables.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkSLEliminateDeadGlobalVariables.cpp; sourceTree = "<group>"; };
 		FE803A2442445C3E46DF3A22 /* SkSVGFeOffset.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkSVGFeOffset.cpp; sourceTree = "<group>"; };
 		FE8075C175740A7C754A4DEA /* SkShaper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkShaper.cpp; sourceTree = "<group>"; };
@@ -6808,6 +6833,7 @@
 		FE879B22658BB180424A30CE /* PatchWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PatchWriter.h; sourceTree = "<group>"; };
 		FE87C9F04B314C6F5863C4C4 /* MtlBackendContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MtlBackendContext.h; sourceTree = "<group>"; };
 		FE8805A1CAACC1C4A0D4244C /* KeyHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyHelpers.h; sourceTree = "<group>"; };
+		FE8829E46317800EB54BBDB5 /* pen_tool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pen_tool.h; sourceTree = "<group>"; };
 		FE88515F890AF0A713C38066 /* SkComposeColorFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkComposeColorFilter.h; sourceTree = "<group>"; };
 		FE88616E59D71B8BB7EE3E04 /* ComputeTask.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ComputeTask.cpp; sourceTree = "<group>"; };
 		FE8863F48B3F0E8745FFD6B1 /* SkLinearGradient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkLinearGradient.h; sourceTree = "<group>"; };
@@ -7430,6 +7456,7 @@
 		FEA83175505C34095465014F /* SkWorkingColorSpaceShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkWorkingColorSpaceShader.h; sourceTree = "<group>"; };
 		FEA83AD10A31C022A39F6CB3 /* DrawTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawTask.h; sourceTree = "<group>"; };
 		FEA8491E6D140A82DBD690C5 /* pngconf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pngconf.h; sourceTree = "<group>"; };
+		FEA88388703EEFB35ABD38DE /* tool_manager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tool_manager.h; sourceTree = "<group>"; };
 		FEA8A15CB6CFCA882F44D254 /* SkICC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkICC.h; sourceTree = "<group>"; };
 		FEA8B2915C4B42980F26B42E /* SkNullCanvas.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkNullCanvas.h; sourceTree = "<group>"; };
 		FEA8B9EC205CCFCABDF29C72 /* SkTiffUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkTiffUtility.h; sourceTree = "<group>"; };
@@ -8311,6 +8338,7 @@
 		FECE471BA37E0CEB874620F0 /* TextureInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextureInfo.h; sourceTree = "<group>"; };
 		FECE57C5189DE5308A84B735 /* SkSLInterfaceBlock.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkSLInterfaceBlock.cpp; sourceTree = "<group>"; };
 		FECE8D007AA86B20030637B8 /* SkPathOpsConic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkPathOpsConic.cpp; sourceTree = "<group>"; };
+		FECE950CBED8CFC74687C82E /* eraser_tool.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = eraser_tool.cpp; sourceTree = "<group>"; };
 		FECEA3C47212493CC1EF711D /* Buffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Buffer.cpp; sourceTree = "<group>"; };
 		FECEB5F637E27B635D9EB510 /* OldWorkspaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldWorkspaceView.swift; sourceTree = "<group>"; };
 		FECEB799E0EE480B9FDCF517 /* SkContourMeasure.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkContourMeasure.cpp; sourceTree = "<group>"; };
@@ -8900,6 +8928,7 @@
 				FEEC66B0152EE3FC5AA7B3BC /* ContentView.swift */,
 				FE665F40B5EBC07F6EA8DCA8 /* Info.plist */,
 				FE3F65EEFDC2AA48163B9F0E /* StudioApp.swift */,
+				FE04FEFB1432374934849921 /* ToolbarView.swift */,
 			);
 			path = mac;
 			sourceTree = "<group>";
@@ -9052,6 +9081,7 @@
 		FEF7BD5B63E3F441B826CD7E /* pngrio.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pngrio.c; sourceTree = "<group>"; };
 		FEF812FA6EF60D1BA74D83C1 /* SkFontArguments.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkFontArguments.h; sourceTree = "<group>"; };
 		FEF8AF76DF24713732618FF2 /* SkSLSwizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkSLSwizzle.h; sourceTree = "<group>"; };
+		FEF8CAAD3FF65D4C48E0BAED /* eraser_tool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = eraser_tool.h; sourceTree = "<group>"; };
 		FEF91220F2FEC088CF35951B /* MtlComputeCommandEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MtlComputeCommandEncoder.h; sourceTree = "<group>"; };
 		FEF91EDB9525C67C841DD5AF /* MtlSampler.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MtlSampler.mm; sourceTree = "<group>"; };
 		FEF92E73318142F632DA10F7 /* SkCompressedDataUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SkCompressedDataUtils.cpp; sourceTree = "<group>"; };
@@ -9433,6 +9463,7 @@
 		03FF9098349259BD4DE06722 /* SkSharedMutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEE5E7A6EB02437FA72AF7D8 /* SkSharedMutex.cpp */; };
 		03FFA8E5A2DED7D3332FB57B /* ColorPickerPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBB260199ECE5AA3C2A08FB /* ColorPickerPanelView.swift */; };
 		03FFB98BD947B4965DD62832 /* SkSafeMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE6B78CBBE358CF1783EBC94 /* SkSafeMath.cpp */; };
+		03FFBB87999D3E26B4E8F9E6 /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE04FEFB1432374934849921 /* ToolbarView.swift */; };
 		03FFC085A636C809D199E63A /* SkFloatingPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE5BF15C9CDCAE7EC9CC9C9F /* SkFloatingPoint.cpp */; };
 		03FFCA99487ACC05A0FDDCBA /* SkTSearch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE97BE3FA457F8BB59FD1086 /* SkTSearch.cpp */; };
 		03FFCCE267B27FABF53F6AF8 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7249CD9242FA244D95F47F /* Document.swift */; };
@@ -9485,6 +9516,7 @@
 		04FF11C1A74E88D0374FF008 /* SkPtrRecorder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE438E3BA2398A21AA6DEB42 /* SkPtrRecorder.cpp */; };
 		04FF12CF473D9D944126A960 /* SkMasks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEBC0EAB1A7EC8C6DCF3FCAB /* SkMasks.cpp */; };
 		04FF132FEF63AF40F8B5B3C3 /* SkTypeface_remote.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEC569D9BD5CBF3B5A77F7A1 /* SkTypeface_remote.cpp */; };
+		04FF15114318DCA34A6C8500 /* eraser_tool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FECE950CBED8CFC74687C82E /* eraser_tool.cpp */; };
 		04FF157D73A1951A8672C6BA /* SkRasterPipeline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE9162CCF29279BE2573A8AB /* SkRasterPipeline.cpp */; };
 		04FF158E7A9A18AF79058CC3 /* SkSLSwitchCase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEA694360135297189D0A608 /* SkSLSwitchCase.cpp */; };
 		04FF15972F2CF133A002466A /* SkSLExtension.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE2E0C3DC3DC8B086601842E /* SkSLExtension.cpp */; };
@@ -9651,6 +9683,7 @@
 		04FF77C981229FD66AADD7E8 /* SkSwizzle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE99CAAFF9EAB1929F0B2AF9 /* SkSwizzle.cpp */; };
 		04FF78875B83A31900B15426 /* SkSurface_Base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEB185451A9FD4975BEB0268 /* SkSurface_Base.cpp */; };
 		04FF78AE64637A63731B2F0B /* SkSLProgramUsage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FED55E0C8801DDB023F48F2E /* SkSLProgramUsage.cpp */; };
+		04FF78B37726259761ED99F0 /* pen_tool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE0C8D418CB1B00D664A8F0E /* pen_tool.cpp */; };
 		04FF7AC230B15A90138739CD /* SkColorFilterImageFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE9E5BCC8E837946C4F87A0D /* SkColorFilterImageFilter.cpp */; };
 		04FF7B51F8AA77B3AD6657B6 /* SkLocalMatrixShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEA55A800B5D02C69F6615BC /* SkLocalMatrixShader.cpp */; };
 		04FF7BEFBDF0D2D8174025DA /* SkMipmapDrawDownSampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEA6BE288660AF1C891ADA5D /* SkMipmapDrawDownSampler.cpp */; };
@@ -9752,6 +9785,7 @@
 		04FFBD998B349226F502C8A7 /* SkSLIsDynamicallyUniformExpression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEC4A08F185EDCDF1CDD0DDD /* SkSLIsDynamicallyUniformExpression.cpp */; };
 		04FFBE91466C85E6E13BB214 /* SkResourceCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEB703BF52330561CFD08AC1 /* SkResourceCache.cpp */; };
 		04FFBED3388D0391C362C1A0 /* SkBigPicture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE7A881ABEE4C2A5CA492816 /* SkBigPicture.cpp */; };
+		04FFBEDC12ECC074DA8F48C5 /* tool_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE7FB04F4050C30FA4EED9B8 /* tool_manager.cpp */; };
 		04FFC00545CB5F525B0F79B3 /* SkRecord.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE4384A46CBC314E6F080898 /* SkRecord.cpp */; };
 		04FFC03B467360410DB8E3B2 /* SkSLFunctionDeclaration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE8A31E4D4F6092E9A693200 /* SkSLFunctionDeclaration.cpp */; };
 		04FFC0756476A54C3DA7D738 /* SkSpecialImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FEFE71C1F129988210E613DF /* SkSpecialImage.cpp */; };

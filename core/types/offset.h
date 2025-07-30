@@ -5,6 +5,7 @@ namespace Ciart::Studio {
         double dx;
         double dy;
 
+        Offset() : dx(0.0), dy(0.0) {}
         Offset(double dx, double dy) : dx(dx), dy(dy) {}
 
         Offset operator+(const Offset& other) const {

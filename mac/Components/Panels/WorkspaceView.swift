@@ -12,6 +12,9 @@ import SwiftUI
 
 typealias Workspace = Ciart.Studio.Workspace
 typealias WorkspaceRenderer = Ciart.Studio.WorkspaceRenderer
+typealias ToolEvent = Ciart.Studio.ToolEvent
+typealias ToolEventType = Ciart.Studio.ToolEventType
+typealias Offset = Ciart.Studio.Offset
 
 class CustomMTKView: MTKView {
     var onMouseMoved: ((NSEvent) -> Void)?
@@ -69,6 +72,31 @@ class CustomMTKView: MTKView {
 struct WorkspaceView: NSViewRepresentable {
     typealias NSViewType = CustomMTKView
     @Binding var statusMessage: String
+    @EnvironmentObject var toolStore: ToolStore
+    
+    private func screenToWorkspaceCoordinate(devicePixelScale: CGFloat, screenPoint: CGPoint, viewBounds: CGRect, workspace: borrowing Workspace) -> Offset {
+        let flippedY = (viewBounds.height - screenPoint.y) * devicePixelScale
+
+        // WorkspaceRenderer와 정확히 동일한 변수명과 계산 사용
+        let scale = workspace.getScale()
+        let size = workspace.getSize()
+        let offset = workspace.getOffset()
+        let screen_center_dx = viewBounds.width / 2 * devicePixelScale
+        let screen_center_dy = viewBounds.height / 2 * devicePixelScale
+        let workspace_center_dx = size.width / 2
+        let workspace_center_dy = size.height / 2
+        
+        let workspace_offset_x = screen_center_dx - workspace_center_dx * scale + offset.dx
+        let workspace_offset_y = screen_center_dy - workspace_center_dy * scale + offset.dy
+        
+        let localX = (screenPoint.x * devicePixelScale - workspace_offset_x) / scale
+        let localY = (flippedY - workspace_offset_y) / scale
+        
+        var result = Offset()
+        result.dx = localX
+        result.dy = localY
+        return result
+    }
 
     class Coordinator: NSObject, MTKViewDelegate {
         var parent: WorkspaceView
@@ -88,6 +116,10 @@ struct WorkspaceView: NSViewRepresentable {
                 Unmanaged.passUnretained(commandQueue).toOpaque())
 
             super.init()
+            
+            // ToolStore와 ToolManager 연결
+            let toolManager = workspace.getToolManager().pointee
+            parent.toolStore.setToolManager(toolManager)
         }
 
         func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
@@ -127,23 +159,52 @@ struct WorkspaceView: NSViewRepresentable {
 
         // Set up event handlers
         mtkView.onMouseMoved = { event in
+            let devicePixelScale = event.window?.backingScaleFactor ?? 1
             let location = mtkView.convert(event.locationInWindow, from: nil)
-            self.statusMessage = "Mouse moved to: \(location)"
+            let offset = self.screenToWorkspaceCoordinate(devicePixelScale: devicePixelScale, screenPoint: location, viewBounds: mtkView.bounds, workspace: context.coordinator.workspace)
+            context.coordinator.workspace.setMousePosition(offset)
+            mtkView.setNeedsDisplay(mtkView.bounds)
+            self.statusMessage = "Mouse at: \(location) -> workspace: (\(offset.dx), \(offset.dy))"
         }
 
         mtkView.onMouseDown = { event in
+            let devicePixelScale = event.window?.backingScaleFactor ?? 1
             let location = mtkView.convert(event.locationInWindow, from: nil)
-            self.statusMessage = "Mouse down at: \(location)"
+            let offset = self.screenToWorkspaceCoordinate(devicePixelScale: devicePixelScale, screenPoint: location, viewBounds: mtkView.bounds, workspace: context.coordinator.workspace)
+            var toolEvent = ToolEvent()
+            toolEvent.type = ToolEventType.Press
+            toolEvent.position = offset
+            toolEvent.pressure = 1.0
+            context.coordinator.workspace.handleToolEvent(toolEvent)
+            mtkView.setNeedsDisplay(mtkView.bounds)
+            self.statusMessage = "Drawing at screen: \(location) -> workspace: (\(offset.dx), \(offset.dy))"
         }
 
         mtkView.onMouseUp = { event in
+            let devicePixelScale = event.window?.backingScaleFactor ?? 1
             let location = mtkView.convert(event.locationInWindow, from: nil)
-            self.statusMessage = "Mouse up at: \(location)"
+            let offset = self.screenToWorkspaceCoordinate(devicePixelScale: devicePixelScale, screenPoint: location, viewBounds: mtkView.bounds, workspace: context.coordinator.workspace)
+            var toolEvent = ToolEvent()
+            toolEvent.type = ToolEventType.Release
+            toolEvent.position = offset
+            toolEvent.pressure = 1.0
+            context.coordinator.workspace.handleToolEvent(toolEvent)
+            mtkView.setNeedsDisplay(mtkView.bounds)
+            self.statusMessage = "Drawing ended at: \(location)"
         }
 
         mtkView.onMouseDragged = { event in
+            let devicePixelScale = event.window?.backingScaleFactor ?? 1
             let location = mtkView.convert(event.locationInWindow, from: nil)
-            self.statusMessage = "Mouse dragged to: \(location)"
+            let offset = self.screenToWorkspaceCoordinate(devicePixelScale: devicePixelScale, screenPoint: location, viewBounds: mtkView.bounds, workspace: context.coordinator.workspace)
+            context.coordinator.workspace.setMousePosition(offset)
+            var toolEvent = ToolEvent()
+            toolEvent.type = ToolEventType.Move
+            toolEvent.position = offset
+            toolEvent.pressure = 1.0
+            context.coordinator.workspace.handleToolEvent(toolEvent)
+            mtkView.setNeedsDisplay(mtkView.bounds)
+            self.statusMessage = "Drawing at: \(location)"
         }
 
         mtkView.onScrollWheel = { event in

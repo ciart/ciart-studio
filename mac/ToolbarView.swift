@@ -12,7 +12,7 @@ struct ToolbarView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Button(action: { toolStore.selectedIndex = 0 }) {
+            Button(action: { toolStore.selectTool(index: 0) }) {
                 Image(systemName: "pencil")
                     .foregroundColor(toolStore.selectedIndex == 0 ? .white : .gray)
                     .frame(width: 32, height: 32)
@@ -21,7 +21,7 @@ struct ToolbarView: View {
             .background(toolStore.selectedIndex == 0 ? Color.blue : Color.clear)
             .cornerRadius(4)
             
-            Button(action: { toolStore.selectedIndex = 1 }) {
+            Button(action: { toolStore.selectTool(index: 1) }) {
                 Image(systemName: "eraser")
                     .foregroundColor(toolStore.selectedIndex == 1 ? .white : .gray)
                     .frame(width: 32, height: 32)

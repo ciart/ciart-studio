@@ -5,6 +5,7 @@
 #include "workspace_renderer.h"
 #include "types/workspace_context.h"
 #include "types/layer.h"
+#include "tools/tool_manager.h"
 
 #include "include/core/SkBitmap.h"
 #include "include/core/SkCanvas.h"
@@ -50,7 +51,7 @@ void WorkspaceRenderer::draw(void* texture, double width, double height) {
     canvas->clear(SK_ColorBLACK);
 
     Offset offset = workspaceContext->getOffset();
-    double scale = workspaceContext->getScale() * workspaceContext->getScale();
+    double scale = workspaceContext->getScale();
     Size size = workspaceContext->getSize();
     Offset screen_center = {width / 2, height / 2};
     Offset workspace_center = {size.width / 2, size.height / 2};
@@ -62,6 +63,9 @@ void WorkspaceRenderer::draw(void* texture, double width, double height) {
     renderWorkspaceBackground(canvas, workspace_rect);
 
     renderLayers(canvas, workspace_rect);
+    
+    // Tool preview 렌더링
+    renderToolPreview(canvas, workspace_rect);
 
     submitRecording(std::move(recorder));
 }
@@ -106,6 +110,27 @@ void WorkspaceRenderer::renderLayers(SkCanvas* canvas, const SkRect& dest_rect) 
 
     sk_sp<SkImage> layer_image = layer_surface->makeImageSnapshot();
     canvas->drawImageRect(layer_image, dest_rect, SkSamplingOptions());
+}
+
+void WorkspaceRenderer::renderToolPreview(SkCanvas* canvas, const SkRect& workspace_rect) {
+    if (!workspaceContext->hasMousePosition()) {
+        return;
+    }
+    
+    auto toolManager = workspaceContext->getToolManager();
+    if (!toolManager) {
+        return;
+    }
+    
+    const Offset& mousePos = workspaceContext->getMousePosition();
+    
+    // 워크스페이스 좌표를 화면 좌표로 변환
+    double scale = workspaceContext->getScale();
+    double screenX = workspace_rect.fLeft + mousePos.dx * scale;
+    double screenY = workspace_rect.fTop + mousePos.dy * scale;
+    
+    Offset screenPos = {screenX, screenY};
+    toolManager->renderToolPreview(canvas, screenPos, scale);
 }
 
 void WorkspaceRenderer::submitRecording(std::unique_ptr<skgpu::graphite::Recorder> recorder) {
