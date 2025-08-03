@@ -44,6 +44,26 @@ c_plus_plus_deps()
 
 header_based_configs()
 
+# ---
+# Windows dependencies
+# ---
+
+git_repository(
+    name = "rules_vulkan",
+    remote = "https://github.com/jadarve/rules_vulkan.git",
+    tag = "v0.0.11"
+)
+
+load("@rules_vulkan//vulkan:repositories.bzl", "vulkan_repositories")
+
+vulkan_repositories(
+    android_use_host_vulkan_sdk = True,
+)
+
+# ---
+# Apple dependencies
+# ---
+
 http_archive(
     name = "build_bazel_rules_swift",
     sha256 = "15f7096b41154393da81594909e2db3f5828a5e671b8d873c35788d82f9c97d2",

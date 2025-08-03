@@ -3,7 +3,9 @@
 #include <vector>
 #include <memory>
 
+#ifdef __APPLE__
 #include <swift/bridging>
+#endif
 
 #include "size.h"
 #include "offset.h"
@@ -34,8 +36,15 @@ namespace Ciart::Studio {
         void move(double dx, double dy);
         void zoom(double magnification);
         
+    
+#ifdef _WIN32
+        WorkspaceRenderer& createRenderer(void* device, void* commandQueue);
+#endif
+
+#ifdef __APPLE__
         WorkspaceRenderer& createRenderer(void* device, void* commandQueue) SWIFT_RETURNS_INDEPENDENT_VALUE;
-        
+#endif
+
     private:
         std::unique_ptr<WorkspaceRenderer> renderer;
         std::shared_ptr<WorkspaceContext> context;
