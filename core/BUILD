@@ -7,17 +7,20 @@ cc_library(
     name = "core",
     srcs = glob(["**/*.cpp"]),
     hdrs = glob(["**/*.h"]),
-    aspect_hints = [":core_swift_interop"],
+    aspect_hints = select({
+        "@platforms//os:macos": [":core_swift_interop"],
+        "//conditions:default": [],
+    }),
     visibility = ["//visibility:public"],
     deps = [
         "@skia//:core",
-        "@skia//:graphite_native_metal",
         "@skia//:png_encode_codec",
         "@skia//:skshaper_core",
         "@skia//:svg_renderer",
     ] + select({
+        "@platforms//os:windows": ["@rules_vulkan//vulkan:vulkan_cc_library", "@skia//:graphite_native_vulkan"],
+        "@platforms//os:macos": ["@skia//:graphite_native_metal", "@skia//:fontmgr_coretext"],
         "@platforms//os:linux": ["@skia//:fontmgr_fontconfig_freetype"],
-        "@platforms//os:macos": ["@skia//:fontmgr_coretext"],
         "//conditions:default": [],
     }),
 )

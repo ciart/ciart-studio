@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ciart-studio (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ciart-studio (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
