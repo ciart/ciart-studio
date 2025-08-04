@@ -20,7 +20,6 @@
 #ifdef __APPLE__
 #include "include/gpu/graphite/mtl/MtlBackendContext.h"
 #include "include/gpu/graphite/mtl/MtlGraphiteTypes_cpp.h"
-#include <Metal/Metal.h>
 #elif defined(_WIN32)
 #include "include/gpu/graphite/vk/VulkanGraphiteContext.h"
 #include "include/gpu/graphite/vk/VulkanGraphiteTypes.h"

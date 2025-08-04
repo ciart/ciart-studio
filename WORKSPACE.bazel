@@ -24,11 +24,11 @@ hedron_compile_commands_setup_transitive_transitive()
 load("@hedron_compile_commands//:workspace_setup_transitive_transitive_transitive.bzl", "hedron_compile_commands_setup_transitive_transitive_transitive")
 hedron_compile_commands_setup_transitive_transitive_transitive()
 
-# Skia
-git_repository(
+http_archive(
     name = "skia",
-    branch = "chrome/m135",
-    remote = "https://skia.googlesource.com/skia.git",
+    sha256 = "c5092bd83801eeb2f60d6c2949e47c3f41aeda9080aaa70297fb481d31a224fc",
+    url = "https://github.com/google/skia/archive/refs/heads/chrome/m135.tar.gz",
+    strip_prefix = "skia-chrome-m135",
 )
 
 local_repository(
@@ -48,10 +48,11 @@ header_based_configs()
 # Windows dependencies
 # ---
 
-git_repository(
+http_archive(
     name = "rules_vulkan",
-    remote = "https://github.com/jadarve/rules_vulkan.git",
-    tag = "v0.0.11"
+    sha256 = "aa19e86cd79e7da459ac65e53184116dc9135b220bf77eb9a3a73894dd40f99d",
+    url = "https://github.com/jadarve/rules_vulkan/archive/refs/tags/v0.0.11.tar.gz",
+    strip_prefix = "rules_vulkan-0.0.11",
 )
 
 load("@rules_vulkan//vulkan:repositories.bzl", "vulkan_repositories")

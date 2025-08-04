@@ -19,8 +19,8 @@ cc_library(
         "@skia//:svg_renderer",
     ] + select({
         "@platforms//os:windows": ["@rules_vulkan//vulkan:vulkan_cc_library", "@skia//:graphite_native_vulkan"],
-        "@platforms//os:linux": ["@skia//:graphite_native_metal", "@skia//:fontmgr_fontconfig_freetype"],
-        "@platforms//os:macos": ["@skia//:fontmgr_coretext"],
+        "@platforms//os:macos": ["@skia//:graphite_native_metal", "@skia//:fontmgr_coretext"],
+        "@platforms//os:linux": ["@skia//:fontmgr_fontconfig_freetype"],
         "//conditions:default": [],
     }),
 )
