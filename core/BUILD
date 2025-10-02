@@ -1,5 +1,5 @@
 load(
-    "@build_bazel_rules_swift//swift:swift.bzl",
+    "@rules_swift//swift:swift.bzl",
     "swift_interop_hint",
 )
 

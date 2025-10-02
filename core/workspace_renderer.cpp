@@ -71,7 +71,7 @@ void WorkspaceRenderer::draw(void* texture, double width, double height) {
 }
 
 sk_sp<SkSurface> WorkspaceRenderer::createBackendSurface(void* texture, double width, double height, skgpu::graphite::Recorder* recorder) {
-#ifdef __APPLE__
+#if defined(__APPLE__)
     return createMetalBackendSurface(texture, width, height, recorder);
 #elif defined(_WIN32)
     return createVulkanBackendSurface(texture, width, height, recorder);

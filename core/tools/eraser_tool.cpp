@@ -122,7 +122,7 @@ namespace Ciart::Studio {
         
         // 점선 효과
         float intervals[] = {4.0f, 4.0f};
-        previewPaint.setPathEffect(SkDashPathEffect::Make(intervals, 2, 0));
+        previewPaint.setPathEffect(SkDashPathEffect::Make(intervals, 2));
         
         float radius = size / 2.0f;
         canvas->drawCircle(position.dx, position.dy, radius, previewPaint);

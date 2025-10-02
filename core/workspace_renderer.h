@@ -32,7 +32,7 @@ namespace Ciart::Studio {
         void renderToolPreview(SkCanvas* canvas, const SkRect& workspace_rect);
         void submitRecording(std::unique_ptr<skgpu::graphite::Recorder> recorder);
         
-#ifdef __APPLE__
+#if defined(__APPLE__)
         void initializeMetalContext(void* device, void* commandQueue);
         sk_sp<SkSurface> createMetalBackendSurface(void* texture, double width, double height, skgpu::graphite::Recorder* recorder);
 #elif defined(_WIN32)
