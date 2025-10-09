@@ -5,7 +5,6 @@
 #include "workspace_renderer.h"
 #include "types/workspace_context.h"
 #include "types/layer.h"
-#include "tools/tool_manager.h"
 
 #include "include/core/SkBitmap.h"
 #include "include/core/SkCanvas.h"
@@ -113,10 +112,10 @@ void WorkspaceRenderer::renderToolPreview(SkCanvas* canvas, const SkRect& worksp
         return;
     }
     
-    auto toolManager = workspaceContext->getToolManager();
-    if (!toolManager) {
-        return;
-    }
+    // auto toolManager = workspaceContext->getToolManager();
+    // if (!toolManager) {
+    //     return;
+    // }
     
     const Offset& mousePos = workspaceContext->getMousePosition();
     
@@ -126,7 +125,7 @@ void WorkspaceRenderer::renderToolPreview(SkCanvas* canvas, const SkRect& worksp
     double screenY = workspace_rect.fTop + mousePos.dy * scale;
     
     Offset screenPos = {screenX, screenY};
-    toolManager->renderToolPreview(canvas, screenPos, scale);
+    // toolManager->renderToolPreview(canvas, screenPos, scale);
 }
 
 void WorkspaceRenderer::submitRecording(std::unique_ptr<skgpu::graphite::Recorder> recorder) {

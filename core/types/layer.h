@@ -38,7 +38,6 @@ namespace Ciart::Studio {
         
         void initializeBitmap();
         void drawBackground(SkCanvas* canvas);
-        void drawTestShapes(SkCanvas* canvas);
         void drawBorder(SkCanvas* canvas);
     };
 }

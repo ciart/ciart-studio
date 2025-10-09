@@ -1,14 +1,11 @@
 #pragma once
 
 #include <vector>
-#include <memory>
 #include "size.h"
 #include "offset.h"
 #include "layer.h"
 
-namespace Ciart::Studio {
-    class ToolManager;
-    
+namespace Ciart::Studio {    
     class WorkspaceContext {
     public:
         WorkspaceContext(const Size& size = {100, 100}, const Offset& offset = {0, 0}, double angle = 0.0, double scale = 1.0, const std::vector<ILayer*>& layers = {})
@@ -25,11 +22,7 @@ namespace Ciart::Studio {
         void clearMousePosition() { hasValidMousePosition = false; }
         const Offset& getMousePosition() const { return mousePosition; }
         bool hasMousePosition() const { return hasValidMousePosition; }
-        
-        // ToolManager 관리
-        void setToolManager(std::shared_ptr<ToolManager> manager) { toolManager = manager; }
-        std::shared_ptr<ToolManager> getToolManager() const { return toolManager; }
-        
+
         void setSize(const Size& newSize) { size = newSize; }
         void setOffset(const Offset& newOffset) { offset = newOffset; }
         void setAngle(double newAngle) { angle = newAngle; }
@@ -46,8 +39,5 @@ namespace Ciart::Studio {
         // 마우스 위치 추적
         Offset mousePosition;
         bool hasValidMousePosition = false;
-        
-        // 도구 관리
-        std::shared_ptr<ToolManager> toolManager;
     };
 }

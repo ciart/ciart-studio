@@ -72,12 +72,10 @@ class CustomMTKView: MTKView {
 struct WorkspaceView: NSViewRepresentable {
     typealias NSViewType = CustomMTKView
     @Binding var statusMessage: String
-    @EnvironmentObject var toolStore: ToolStore
     
     private func screenToWorkspaceCoordinate(devicePixelScale: CGFloat, screenPoint: CGPoint, viewBounds: CGRect, workspace: borrowing Workspace) -> Offset {
         let flippedY = (viewBounds.height - screenPoint.y) * devicePixelScale
 
-        // WorkspaceRenderer와 정확히 동일한 변수명과 계산 사용
         let scale = workspace.getScale()
         let size = workspace.getSize()
         let offset = workspace.getOffset()
@@ -116,10 +114,6 @@ struct WorkspaceView: NSViewRepresentable {
                 Unmanaged.passUnretained(commandQueue).toOpaque())
 
             super.init()
-            
-            // ToolStore와 ToolManager 연결
-            let toolManager = workspace.getToolManager().pointee
-            parent.toolStore.setToolManager(toolManager)
         }
 
         func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
@@ -238,8 +232,4 @@ struct WorkspaceView: NSViewRepresentable {
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
-}
-
-#Preview {
-    WorkspaceView(statusMessage: .constant("Preview message")).frame(width: 400, height: 300)
 }

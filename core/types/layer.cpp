@@ -1,7 +1,6 @@
 #include "layer.h"
 #include "include/core/SkColorSpace.h"
 #include "include/core/SkPaint.h"
-#include "include/core/SkPath.h"
 #include "include/core/SkImageInfo.h"
 #include "include/core/SkImage.h"
 
@@ -22,7 +21,6 @@ void BitmapLayer::drawTestContent() {
     canvas.clear(SK_ColorTRANSPARENT);
     
     drawBackground(&canvas);
-    drawTestShapes(&canvas);
     drawBorder(&canvas);
     
     isInitialized = true;
@@ -46,26 +44,6 @@ void BitmapLayer::drawBackground(SkCanvas* canvas) {
     paint.setStyle(SkPaint::kFill_Style);
     paint.setColor(SkColorSetRGB(100, 150, 200));
     canvas->drawRect(SkRect::MakeWH(width, height), paint);
-}
-
-void BitmapLayer::drawTestShapes(SkCanvas* canvas) {
-    SkPaint paint;
-    paint.setAntiAlias(true);
-    paint.setStyle(SkPaint::kFill_Style);
-    
-    paint.setColor(SkColorSetRGB(255, 100, 100));
-    canvas->drawCircle(width * 0.3f, height * 0.3f, 50, paint);
-    
-    paint.setColor(SkColorSetRGB(100, 255, 100));
-    canvas->drawRect(SkRect::MakeXYWH(width * 0.5f, height * 0.2f, 80, 60), paint);
-    
-    paint.setColor(SkColorSetRGB(100, 100, 255));
-    SkPath path;
-    path.moveTo(width * 0.2f, height * 0.7f);
-    path.lineTo(width * 0.4f, height * 0.5f);
-    path.lineTo(width * 0.6f, height * 0.8f);
-    path.close();
-    canvas->drawPath(path, paint);
 }
 
 void BitmapLayer::drawBorder(SkCanvas* canvas) {

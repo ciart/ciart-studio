@@ -43,11 +43,7 @@ namespace Ciart::Studio {
         void setActiveLayerIndex(int index);
         int getActiveLayerIndex() const { return activeLayerIndex; }
         ILayer* getActiveLayer() const;
-        
-        // 도구 관리
-        ToolManager& getToolManager() SWIFT_RETURNS_INDEPENDENT_VALUE { return *toolManager; }
-        const ToolManager& getToolManager() const SWIFT_RETURNS_INDEPENDENT_VALUE { return *toolManager; }
-        
+
         // 도구 이벤트 처리
         void handleToolEvent(const ToolEvent& event);
         
@@ -68,7 +64,6 @@ namespace Ciart::Studio {
     private:
         std::unique_ptr<WorkspaceRenderer> renderer;
         std::shared_ptr<WorkspaceContext> context;
-        std::unique_ptr<ToolManager> toolManager;
         int activeLayerIndex = 0;
     };
 }

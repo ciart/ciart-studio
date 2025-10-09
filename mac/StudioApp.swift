@@ -11,7 +11,7 @@ import SwiftUI
 struct StudioApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(ToolStore()).environmentObject(DocumentStore())
+            ContentView().environmentObject(DocumentStore())
                 .toolbarBackgroundVisibility(.hidden, for: .windowToolbar)
         }
     }
